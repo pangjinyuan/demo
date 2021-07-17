@@ -1,0 +1,20 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@47.113.216.111:1521:orcl
+    password: HRM1234
+    username: HRMDB
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    cache: false
+    suffix: .html
+    encoding: UTF-8
+    content-type: text/html
+    mode: HTML
+
+mybatis:
+  type-aliases-package: com.example.bootdemo.bean
+  mapper-locations: classpath:mapper/*Mapper.xml
