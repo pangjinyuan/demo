@@ -43,7 +43,7 @@ function handleResult() {
         if(rel.res=="enable") {
           //alert("登录成功！");
         //页面跳转
-           window.location.href='HRMmain.html?emp_id='+name;
+           window.location.href='main.html?emp_id='+name;
            }else{
             alert("登录失败，用户名或密码错误");
         }

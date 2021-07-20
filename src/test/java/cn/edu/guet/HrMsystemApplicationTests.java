@@ -22,6 +22,7 @@ class HrMsystemApplicationTests {
         List<EmpPower> list=powerMapper.getEmpPower(emp_id);
         for(EmpPower empPower:list){
             System.out.println(empPower.getPower_name());
+            System.out.println(empPower.getUrl());
         }
 
     }

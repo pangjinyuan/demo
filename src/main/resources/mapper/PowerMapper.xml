@@ -6,6 +6,7 @@
             <result property="power_name" column="power_name"></result>
             <result property="father_id" column="father_id" ></result>
             <result property="father_name" column="father_name"></result>
+            <result property="url"         column="url"></result>
         </resultMap>
     <select id="getEmpPower" parameterType="string" resultMap="setMap">
         <!--SELECT * FROM emp_power_table WHERE post_id=#{emp_id}-->

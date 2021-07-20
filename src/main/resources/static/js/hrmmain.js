@@ -1,6 +1,7 @@
 //定义HTTP连接对象
 var xmlHttp;
 
+
 //实例化HTTP连接对象
 function createXmlHttpRequest() {
     if(window.XMLHttpRequest) {
@@ -36,32 +37,54 @@ function handleResult() {
         //console.log(typeof eval('('+xmlHttp.responseText+')'));//不推荐使用
         console.log(typeof JSON.parse(xmlHttp.responseText));
         rel = JSON.parse(xmlHttp.responseText);
-        //console.log(rel.menutree.业务办理);
+        console.log(rel.menutree);
 
-        firstul=$("<ul class=\"accordion\"></ul>");
+        var temp=1;
         for( i in rel.menutree){
-            fatherli=$("<li></li>");
-            fatherspan=$("<span>"+i+"</span>");
-            sondiv=$("<div></div>")
-            sonul=$("<ul></ul>");
+            var fatherli;
+            var sonul;
+            if(temp==1){
+                $("#nav li a ").append("<cite style=\"inline;\">"+i+"</cite>");
+            }
+            else{
+                fatherli=$("<li class ><a  href=\"javascript:;\" class><cite >"+i+"</cite></a>"+"</li>");
+                // sondiv=$("<div></div>")
+                sonul=$("<ul class='sub-menu' style></ul>");
+            }
+
             console.log("这是父节点:"+i);
             for (j in rel.menutree[i]){
+                var sonli;
                 //这里onclick可以将地址发送过去
-                sonli=$("<li onclick='test()'>"+rel.menutree[i][j]+"</li>");
-                sonul.append(sonli);
-                console.log("这是子节点:"+rel.menutree[i][j]);
+                if(temp==1){
+                    var str=rel.menutree[i][j].power_name.toString();
+                    var urls=rel.menutree[i][j].url;
+                    $("#nav li ul").append("<li><a onclick='testif(\""+urls+"\")' class><cite style='inline;'>"+str+"</cite></a></li>")
+                }
+                else{
+                    var urls=rel.menutree[i][j].url.toString();
+                    var str=rel.menutree[i][j].power_name.toString();
+                    console.log("这是子节点链接:"+urls);
+                    sonli=$("<li><a onclick='testif(\""+urls+"\")' class><cite>"+str+"</cite></a> </li>");
+                    //这里需要转义字符
+                    sonul.append(sonli);
+                    console.log("这是子节点:"+rel.menutree[i][j].power_name.toString());
+                }
+
             }
-            sondiv.append(sonul);
-            fatherli.append(fatherspan);
-            fatherli.append(sondiv);
-            firstul.append(fatherli);
-            $(".menu").append(firstul);
+           // sondiv.append(sonul);
+            if(temp!=1){
+                fatherli.append(sonul);
+                $("#nav").append(fatherli);
+            }
+            temp=temp+1;
+
         }
-        //这是点击大标题的效果 不要动
-        $("ul.accordion li span").on('click', function () {
-            $(this).parent().siblings().removeClass('selected').find('div').hide();
-            $(this).parent().addClass('selected');
-            $(this).next().slideDown(500);
-        });
     }
+}
+
+
+
+function testif(urls) {
+    document.getElementById("MyApplicationPage").src=urls;
 }
