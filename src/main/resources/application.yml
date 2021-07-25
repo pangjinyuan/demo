@@ -6,6 +6,8 @@ spring:
     url: jdbc:oracle:thin:@47.113.216.111:1521:orcl
     password: HRM1234
     username: HRMDB
+    mvc:
+      static-path-pattern: /static/**
   thymeleaf:
     prefix: classpath:/templates/
     check-template-location: true
@@ -18,3 +20,16 @@ spring:
 mybatis:
   type-aliases-package: com.example.bootdemo.bean
   mapper-locations: classpath:mapper/*Mapper.xml
+
+#showSql
+logging:
+  level:
+    com:
+      example:
+        mapper: debug
+
+pagehelper:
+  helper-dialect: oracle # 指定数据库类型
+  reasonable: true
+  params: count=countSql
+  support-methods-arguments: true
